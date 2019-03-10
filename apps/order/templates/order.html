@@ -1,0 +1,233 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block page_title %}
+    结算页面
+{% endblock %}
+
+{% block page_css %}
+    <link href="{% static 'assets/css/amazeui.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/base/demo.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/hmstyle.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/car.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link href="{% static 'css/jsstyle.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block page_js %}
+    <script src="{% static 'js/car.js' %}" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            let total_price = $('#total').find('em').text();
+            $('#reality_pay').find('em').text(total_price)
+        });
+        $(function () {
+            $('.new-addr-btn').each(function () {
+                $(this).find('.set_default').click(function () {
+                    $('.set_default').removeClass("hidden");
+                    $('.new-addr-btn span').removeClass("hidden");
+                    $(this).addClass("hidden");
+                    $(this).next('span').addClass("hidden")
+                    var aid = $(this).attr('aid');
+                    var data = {
+                        aid:aid
+                    };
+                    $.get("{%url 'setdefault'%}",data,function(result){
+                        if (result.status===200){
+                        }
+                    })
+                })
+            })
+        });
+        $(function () {
+            $('.del_addr').click(function () {
+                 alert('是否删除？');
+                // 删除整个li
+                $(this).parent().parent().remove();
+                var aid = $(this).attr('aid');
+                var data = {
+                        aid:aid
+                    };
+                $.get("{% url 'deladdr' %}",data, function(result){
+                    if (result.status===200){
+
+                    }
+                })
+            })
+        });
+        $(function () {
+            {#更改省份后的操作#}
+            $("select[name='province']").change(function(){
+                var province = $(this).find('option:selected').text();
+                data = {
+                    province:province
+                };
+                $.get("{% url 'select' %}",data,function(result){
+                    if (result.status===200){
+                        // 先清空城市下拉框
+			            $("select[name='city']").empty();
+			            var content = result.content;
+			            var citys = content.citys;
+			            $.each(citys, function(i, d) {
+                            $("select[name='city']").append(
+                                    "<option value='"+d+"'>" + d
+                                            + "</option>");});
+                    }
+                })
+            })
+        });
+        $(function () {
+            {#更改城市后的操作#}
+            $("select[name='city']").change(function(){
+                var city = $(this).find('option:selected').text();
+                data = {
+                    city:city
+                };
+                $.get("{% url 'selcity' %}",data,function(result){
+                    if (result.status===200){
+                        // 先清空城市下拉框
+			            $("select[name='dist']").empty();
+			            var content = result.content;
+			            var dists = content.dists;
+			            $.each(dists, function(i, d) {
+                            $("select[name='dist']").append(
+                                    "<option value='"+d+"'>" + d
+                                            + "</option>");});
+                    }
+                })
+            })
+        });
+        $(function () {
+            $('#receive_save').click(function () {
+                var name = $('#receive_person').find('input').val();
+                var phone = $('#receive_phone').find('input').val();
+                var province = $('#receive_province option:selected').text();
+                var city =  $('#receive_city option:selected').text();
+                var dist =  $('#receive_dist option:selected').text();
+                var detail = $('#receive_detail').find('textarea').val();
+                data = {
+                    name:name,
+                    phone:phone,
+                    province:province,
+                    city:city,
+                    dist:dist,
+                    detail:detail,
+                    csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
+                };
+                $.post("{% url 'add_addr' %}",data,function(result){
+                    if (result.status===200){
+                        $('.theme-popover-mask').hide();
+                        $('.theme-popover').slideUp(200);
+                        if (result.content.msg==='OK'){
+                            alert('保存成功！！');
+                            {#创建一个地址框#}
+                            var address = result.content;
+                            $('#loc_info')
+                                .append(
+                                    {#创建div#}
+                                    $('<div>').addClass('per-border'))
+                                .append(
+                                    {#创建li#}
+                                    $('<li>').addClass('user-addresslist').attr('aid',address.aid)
+                                        {#创建class="address-left"的div#}
+                                        .append(
+                                            $('<div>').addClass('address-left')
+                                                {#创建class="user DefaultAddr"的div#}
+                                                .append(
+                                                    $('<div>').addClass('user').addClass('DefaultAddr')
+                                                        {#创建class="class="buy-address-detail"的aspan#}
+                                                        .append(
+                                                            $('<span>').addClass('buy-address-detail')
+                                                                .append(
+                                                                    $('<span>').addClass('buy-user').text(address.reciver)
+                                                                )
+                                                                .append(
+                                                                    $('<span>').addClass('buy-phone').text(address.phone)
+                                                                )
+                                                        )
+                                                )
+                                                {#创建class="default-address DefaultAddr"的div#}
+                                                .append(
+                                                    $('<div>').addClass('default-address').addClass('DefaultAddr')
+                                                        {#创建收货地址span#}
+                                                        .append(
+                                                            $('<span>').addClass('buy-line-title').addClass('buy-line-title-type').text('收货地址：')
+                                                        )
+                                                        {#创建class="buy--address-detail"的span#}
+                                                        .append(
+                                                            $('<span>').addClass('buy--address-detail')
+                                                                .append(
+                                                                    $('<span>').addClass('province').text(address.province)
+                                                                )
+                                                                .append(
+                                                                    $('<span>').addClass('city').text(address.city)
+                                                                )
+                                                                .append(
+                                                                    $('<span>').addClass('dist').text(address.dist)
+                                                                )
+                                                                .append(
+                                                                    $('<span>').addClass('street').text(address.street)
+                                                                )
+                                                        )
+                                                )
+                                                {#创建class="deftip"的div#}
+                                                .append(
+                                                    $('<div>').addClass('deftip')
+                                                )
+                                        )
+                                        {#创建class="address-right"的div#}
+                                        .append(
+                                            $('<div>').addClass('address-right')
+                                        )
+                                        {#创建class="clear"的div#}
+                                        .append(
+                                            $('<div>').addClass('clear')
+                                        )
+                                        {#创建class="new-addr-btn"的div#}
+                                        .append(
+                                            $('<div>').addClass('new-addr-btn')
+                                                .append(
+                                                    $('<a>').addClass('set_default').attr('href',"javascript:void(0);")
+                                                        .attr('aid',address.aid).text('设为默认')
+                                                )
+                                                .append(
+                                                    $('<span>').text('|')
+                                                )
+                                                .append(
+                                                    $('<a>').attr('href','#').text('编辑')
+                                                )
+                                                .append(
+                                                    $('<span>').addClass('new-addr-bar').text('|')
+                                                )
+                                                .append(
+                                                    $('<a>').addClass('del_addr').attr('href',"javascript:void(0);")
+                                                        .attr('onclick',"delClick(this);").attr('aid',address.aid)
+                                                        .text('删除')
+                                                )
+                                        )
+                                )
+                        }else {
+                            alert('保存失败！！')
+                        }
+
+                    }
+
+                })
+            })
+
+        })
+
+    </script>
+    <script src="{% static 'js/order.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block page_head %}
+    {% include 'common/top.html' %}
+    {% include 'common/search/search.html'%}
+{% endblock %}
+
+{% block page_main %}
+    {% include 'include/main.html' %}
+{% endblock %}
+
+{% block page_footer %}
+{% endblock %}

@@ -1,0 +1,220 @@
+{% load staticfiles %}
+<div class="concent">
+    <!--地址 -->
+    <div class="paycont">
+        <div class="address">
+            <h3>确认收货地址 </h3>
+            <div class="control">
+                <div class="tc-btn createAddr theme-login am-btn am-btn-danger">使用新地址</div>
+            </div>
+            <div class="clear"></div>
+            <ul id="loc_info">
+                <div class="per-border"></div>
+                <li class="user-addresslist defaultAddr" id="first_addr" aid="{{ defaultaddr.aid }}">
+                    <div class="address-left">
+                        <div class="user DefaultAddr">
+                            <span class="buy-address-detail">
+                                <span class="buy-user">{{ defaultaddr.reciver }}</span>
+                                <span class="buy-phone">{{ defaultaddr.phone }}</span>
+                            </span>
+                        </div>
+                        <div class="default-address DefaultAddr">
+                            <span class="buy-line-title buy-line-title-type">收货地址：</span>
+                            <span class="buy--address-detail">
+                                <span class="province">{{ defaultaddr.province }}</span>
+                                <span class="city">{{ defaultaddr.city }}</span>
+                                <span class="dist">{{ defaultaddr.area }}</span>
+                                <span class="street">{{ defaultaddr.detail_loc }}</span>
+                            </span>
+                        </div>
+                        <div class="deftip">默认地址</div>
+                    </div>
+                    <div class="address-right">
+                        <a href="#"><span class="am-icon-angle-right am-icon-lg"></span></a>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="new-addr-btn">
+                        <a href="javascript:void(0);" class="hidden set_default" aid="{{ defaultaddr.aid }}">设为默认</a>
+                        <span class="new-addr-bar hidden">|</span>
+                        <a href="{% url 'person:address' %}?uid={{ user.id }}">编辑</a>
+                        <span class="new-addr-bar">|</span>
+                        <a href="javascript:void(0);" onclick="delClick(this);" aid="{{ defaultaddr.aid }}" class="del_addr">删除</a>
+                    </div>
+                </li>
+                {% for addr in address %}
+                    <div class="per-border"></div>
+                    <li class="user-addresslist" aid="{{ addr.aid }}">
+                            <div class="address-left">
+                                <div class="user DefaultAddr">
+                                    <span class="buy-address-detail">
+                                        <span class="buy-user">{{ addr.reciver }}</span>
+                                        <span class="buy-phone">{{ addr.phone }}</span>
+                                    </span>
+                                </div>
+                                <div class="default-address DefaultAddr">
+                                    <span class="buy-line-title buy-line-title-type">收货地址：</span>
+                                    <span class="buy--address-detail">
+                                        <span class="province">{{ addr.province }}</span>
+                                        <span class="city">{{ addr.city }}</span>
+                                        <span class="dist">{{ addr.area }}</span>
+                                        <span class="street">{{ addr.detail_loc }}</span>
+                                    </span>
+                                </div>
+                                <div class="deftip"></div>
+                            </div>
+                            <div class="address-right">
+                                <a href="#"><span class="am-icon-angle-right am-icon-lg"></span></a>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="new-addr-btn">
+                                <a href="javascript:void(0);" class="set_default" aid="{{ addr.aid }}">设为默认</a>
+                                <span>|</span>
+                                <a href="{% url 'person:address' %}?uid={{ user.id }}">编辑</a>
+                                <span class="new-addr-bar">|</span>
+                                <a href="javascript:void(0);" onclick="delClick(this);" aid="{{ addr.aid }}" class="del_addr">删除</a>
+                            </div>
+                        </li>
+                {% endfor %}
+            </ul>
+
+            <div class="clear"></div>
+        </div>
+        <!--物流 -->
+        <div class="logistics">
+            <h3>选择物流方式</h3>
+            <ul class="op_express_delivery_hot">
+                <li data-value="yuantong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -468px"></i>圆通<span></span></li>
+                <li data-value="shentong" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -1008px"></i>申通<span></span></li>
+                <li data-value="yunda" class="OP_LOG_BTN  "><i class="c-gap-right" style="background-position:0px -576px"></i>韵达<span></span></li>
+                <li data-value="zhongtong" class="OP_LOG_BTN op_express_delivery_hot_last "><i class="c-gap-right" style="background-position:0px -324px"></i>中通<span></span></li>
+                <li data-value="shunfeng" class="OP_LOG_BTN  op_express_delivery_hot_bottom"><i class="c-gap-right" style="background-position:0px -180px"></i>顺丰<span></span></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <!--支付方式-->
+        <div class="logistics">
+            <h3>选择支付方式</h3>
+            <ul class="pay-list">
+                <li class="pay card"><img src="{% static 'img/wangyin.jpg' %}"/>银联<span></span></li>
+                <li class="pay qq"><img src="{% static 'img/weizhifu.jpg' %}"/>微信<span></span></li>
+                <li class="pay taobao"><img src="{% static 'img/zhifubao.jpg' %}" />支付宝<span></span></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <!--订单 -->
+        <div class="concent">
+            <div id="payTable">
+                <h3>确认订单信息</h3>
+                <div class="clear"></div>
+                {% include 'include/order_carlist.html' %}
+                <!--信息 -->
+                <div class="order-go clearfix">
+                    <div class="pay-confirm clearfix">
+                        <div class="box">
+                            <div tabindex="0" id="holyshit267" class="realPay">
+                                <em class="t">实付款：</em>
+                                <span class="price g_price " id="reality_pay">
+                                    <span>¥</span>
+                                    <em class="style-large-bold-red " id="J_ActualFee"></em>
+                                </span>
+                            </div>
+                            <div id="holyshit268" class="pay-address">
+                                <p class="buy-footer-address">
+                                    <span class="buy-line-title buy-line-title-type">寄送至：</span>
+                                    <span class="buy--address-detail">
+                                        <span class="province"></span>
+                                        <span class="city"></span>
+                                        <span class="dist"></span>
+                                        <span class="street"></span>
+                                    </span>
+                                </p>
+                                <p class="buy-footer-address">
+                                    <span class="buy-line-title">收货人：</span>
+                                    <span class="buy-address-detail">
+                                        <span class="buy-user"> </span>
+                                        <span class="buy-phone"></span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div id="holyshit269" class="submitOrder">
+                            <div class="go-btn-wrap">
+                                <a id="J_Go" href="javascript:void(0);" class="btn-go" tabindex="0" title="点击此按钮，提交订单">提交订单</a>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+<div class="theme-popover-mask"></div>
+<div class="theme-popover">
+    <!--标题 -->
+    <div class="am-cf am-padding">
+        <div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add address</small></div>
+    </div>
+    <hr/>
+    <div class="am-u-md-12">
+        <form class="am-form am-form-horizontal">
+            {% csrf_token %}
+            <div class="am-form-group" id="receive_person">
+                <label for="user-name" class="am-form-label">收货人</label>
+                <div class="am-form-content">
+                    <input type="text" id="user-name" placeholder="收货人" >
+                </div>
+            </div>
+
+            <div class="am-form-group" id="receive_phone">
+                <label for="user-phone" class="am-form-label">手机号码</label>
+                <div class="am-form-content">
+                    <input id="user-phone" placeholder="手机号必填" type="email">
+                </div>
+            </div>
+
+            <div class="am-form-group" id="receive_loc">
+                <label for="user-phone" class="am-form-label">所在地</label>
+                <div class="am-form-content address">
+                    <select data-am-selected name="province" id="receive_province">
+                        {% for province in provinces %}
+                            <option >{{ province.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <select data-am-selected name="city" id="receive_city">
+                        <option >{{ city.name }}</option>
+{#                        {% for city in citys %}#}
+{#                            <option >{{ city.name }}</option>#}
+{#                        {% endfor %}#}
+                    </select>
+                    <select data-am-selected name="dist" id="receive_dist">
+                        <option >{{ city.name }}</option>
+{#                        {% for area in areas %}#}
+{#                            <option >{{ area.name }}</option>#}
+{#                        {% endfor %}#}
+                    </select>
+                </div>
+            </div>
+
+            <div class="am-form-group" id="receive_detail">
+                <label for="user-intro" class="am-form-label">详细地址</label>
+                <div class="am-form-content">
+                    <textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
+                    <small>100字以内写出你的详细地址...</small>
+                </div>
+            </div>
+
+            <div class="am-form-group theme-poptit">
+                <div class="am-u-sm-9 am-u-sm-push-3">
+                    <div class="am-btn am-btn-danger" id="receive_save">保存</div>
+                    <div class="am-btn am-btn-danger close">取消</div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="clear"></div>

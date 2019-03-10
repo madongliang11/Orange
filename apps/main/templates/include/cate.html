@@ -1,0 +1,39 @@
+<div id="nav" class="navfull" style="position: static;">
+    <div class="area clearfix">
+        <div class="category-content" id="guide_2">
+            <div class="category" style="box-shadow:none ;margin-top: 2px;">
+                <ul class="category-list navTwo" id="js_climit_li">
+                    {% for cate in cate_list %}
+                        <li class="menu_one">
+                            <div class="category-info">
+                                <h3 class="category-name b-category-name">
+                                    <a class="ml-22" href="{% url 'list:sort' %}?cate_id={{ cate.cate_id }}">{{ cate.name }}</a>
+                                </h3>
+                            </div>
+                            <div class="menu-item menu-in top">
+                                <div class="area-in">
+                                    <div class="area-bg">
+                                        <div class="menu-srot">
+                                            {% for sub_menu in cate.sub_menus %}
+                                                <div class="sort-side">
+                                                    <dl class="dl-sort">
+                                                        <dt><span>{{ sub_menu.name }}</span></dt>
+                                                        {% for sub_menu2 in sub_menu.sub_menus2 %}
+                                                            <dd><a href="{% url 'list:sort' %}?cate_id={{ sub_menu2.cate_id }}"><span>{{ sub_menu2.name }}</span></a></dd>
+                                                        {% endfor %}
+                                                    </dl>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,37 @@
+@charset "utf-8";
+body, div, iframe, ul, ol, dl, dt, dd, li, dl, h1, h2, h3, h4, table, th, td, input,
+button, select, textarea {
+    margin: 0;
+    padding: 0;
+    font-style: normal;
+    font: 12px/22px "\5B8B\4F53", Arial, Helvetica, sans-serif;
+}
+
+/*去掉列表默认样式*/
+ol, ul, li {
+    list-style: none;
+}
+
+/*清除浮动*/
+.clear {
+    zoom: 1;
+}
+
+.clear:after {
+    clear: both;
+    content: '';
+    display: block;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+/*设置*/
+a {
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #F00;
+}

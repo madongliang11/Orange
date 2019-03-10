@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>404</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+
+    <link href="{% static 'css/error.css' %}" rel="stylesheet" type="text/css" media="all">
+    <link href="//fonts.googleapis.com/css?family=Ropa+Sans:400,400i&amp;subset=latin-ext" rel="stylesheet">
+</head>
+<body>
+<div class="header">
+    <h1>错误界面</h1>
+</div>
+<div class="w3-main">
+    <div class="agile-info">
+        <h3>SORRY</h3>
+        <h2>4<img src="{% static 'img/confused.gif' %}" alt="image">4</h2>
+        <p>应用程序中发生了错误，无法显示该界面</p>
+        <a href="#">首页</a>
+    </div>
+</div>
+
+</body>
+</html>

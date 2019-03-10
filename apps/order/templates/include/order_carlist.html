@@ -1,0 +1,34 @@
+{% load staticfiles %}
+{% csrf_token %}
+<ul class="cart_list_th clearfix">
+    <li class="col01">商品名称</li>
+    <li class="col02">商品单位</li>
+    <li class="col03">商品价格</li>
+    <li class="col04">数量</li>
+    <li class="col05">小计</li>
+    <li class="col06">配送方式</li>
+</ul>
+{% for car in cars %}
+    <ul class="cart_list_td clearfix">
+        <li class="col01"><input type="checkbox" name="checkbox" checked class="son_check"></li>
+        <li class="col02"><img src="{% static 'img/big' %}/{{ car.image.img_url }}.jpg"></li>
+        <li class="col03">{{ car.shop_name }}</li>
+        <li class="col04">500g</li>
+        <li class="col05">{{ car.shop.promote_price }}</li>
+        <li class="col06">
+            <div class="num_add">
+                <a href="javascript:;" class="add fl" add_shop_id="{{ car.shop.shop_id }}">+</a>
+                <input type="text" class="num_show fl" id="{{ car.car_id}}" min="1" max="{{ car.shop.stock }}" value="{{ car.number }}">
+              <a href="javascript:;" class="minus fl" reduce_shop_id="{{ car.shop.shop_id }}">-</a>
+            </div>
+        </li>
+        <li class="col07 single_all">{{ car.sum_price }}</li>
+        <li class="col08 delete-div">包邮</li>
+    </ul>
+{% endfor %}
+ <ul class="settlements">
+    <li class="col01"><input type="checkbox" name="" checked="" id="all_check"></li>
+    <li class="col02">全选</li>
+    <li class="col03" id = 'total'>合计(不含运费)：<span>¥</span><em>{{ total_price }}</em><br>共计<b>{{ shop_num }}</b>件商品</li>
+{#    <li class="col04"><a href="#" id="buy_btn">去结算</a></li>#}
+</ul>

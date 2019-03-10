@@ -1,0 +1,28 @@
+{% load staticfiles %}
+{% for sub_cate in sub_list %}
+    <div class="f{{ forloop.counter }}">
+        <div class="am-container " >
+            <div class="shopTitle ">
+                <h4 class="floor-title">{{ sub_cate.name }}</h4>
+                <div class="today-brands " style="right:0px ;top:13px;">
+                    {% for shop in sub_cate.shops %}
+                        <a href="{% url 'detail' %}?id={{ shop.shop_id }}">{{ shop.name }}</a>|
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="am-g am-g-fixed floodSeven">
+            <div class="am-u-sm-5 am-u-md-3 text-one list">
+                <div class="word">
+                    {% for shop in sub_cate.shops %}
+                        <a href="{% url 'detail' %}?id={{ shop.shop_id }}">
+                            <p><img src="/static/img/big/{{ shop.image.img_url }}.jpg"></p>
+                            <p style="margin-left: 10px">{{ shop.name }}</p>
+                            <p style="color: red;font-size: 18px;margin-left: 10px">￥{{ shop.original_price }}</p>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

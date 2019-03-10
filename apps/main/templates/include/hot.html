@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<div class="am-container">
+    <div class="sale-mt">
+       <i></i>
+       <em class="sale-title">限时秒杀</em>
+       <div class="s-time" id="countdown">
+            <span class="hh" id="time_h">00</span>
+            <span class="mm" id="time_m">00</span>
+            <span class="ss" id="time_s">00</span>
+       </div>
+    </div>
+    <div class="am-g am-g-fixed sale">
+        {% for hot_shop in hot_list %}
+            <div class="am-u-sm-3 sale-item">
+                <div class="s-img">
+                    <a href="{% url 'detail'%}?id={{ hot_shop.shop_id }}"><img src="/static/img/big/{{ hot_shop.image.img_url }}.jpg"></a>
+                </div>
+                <div class="s-info">
+                    <a href="#"><p class="s-title">{{ hot_shop.name }}</p></a>
+                    <div class="s-price">￥<b>{{ hot_shop.original_price }}</b>
+                        <a class="s-buy" href="#">秒杀</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+

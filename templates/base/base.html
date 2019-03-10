@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %}{% endblock %}</title>
+    <script src="{% static 'js/jquery3.3.1.js' %}"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static 'css/common.css' %} " rel="stylesheet" type="text/css">
+    {% block page_css %}
+    {% endblock %}
+    {% block page_js %}
+    {% endblock %}
+</head>
+<body>
+    {% block page_head %}
+
+    {% endblock %}
+    {% block page_main %}
+
+    {% endblock %}
+    {% block page_footer %}
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% load cache %}
+{% load staticfiles %}
+{% block page_title %}
+    首页
+{% endblock %}
+{% block page_css %}
+    <link href="{% static 'assets/css/amazeui.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'assets/css/admin.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/base/demo.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/hmstyle.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block page_js %}
+    <script src="{% static 'js/cate.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/js/amazeui.min.js'%}" type="text/javascript"></script>
+    <script src="{% static 'js/sidenav.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/time_activite.js' %}" type="text/javascript"></script>
+{% endblock %}
+{% block page_head %}
+    <div class="hmtop">
+        {% include  'common/top.html'%}
+        {% include  'common/search/search.html' %}
+    </div>
+    <b class="line"></b>
+    <div class="shopNav">
+        <div class="slideall" style="height: auto;">
+            {% include 'include/nav.html' %}
+            {% include 'include/banner.html'%}
+            {% include 'include/cate.html'%}
+            {% include 'include/news.html' %}
+        </div>
+    </div>
+{% endblock %}
+{% block page_main %}
+    <div class="shopMainbg">
+        <div class="shopMain" id="shopmain">
+            {% include 'include/hot.html' %}
+            <div class="clear "></div>
+            {% include 'include/content.html' %}
+            {% include 'common/footer.html'%}
+        </div>
+    </div>
+    <div class=tip>
+        {% include 'include/sidenav.html' %}
+    </div>
+
+{% endblock %}
+{#{% block page_footer %}#}
+{#    {% include 'common/footer.html'%}#}
+{#{% endblock %}#}

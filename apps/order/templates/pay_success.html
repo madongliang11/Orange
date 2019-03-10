@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+{% block page_title %}
+    付款成功页面
+{% endblock %}
+{% block page_css%}
+    <link rel="stylesheet"  type="text/css" href="{% static 'assets/css/amazeui.css' %}"/>
+    <link href="{% static 'assets/css/admin.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'basic/css/demo.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/sustyle.css' %}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block page_js %}
+
+{% endblock %}
+
+{% block page_head %}
+    {% include 'common/top.html' %}
+    {% include 'common/search/search.html' %}
+{% endblock %}
+
+{% block page_main %}
+    <div class="take-delivery">
+        <div class="status">
+           <h2>您已成功付款</h2>
+           <div class="successInfo">
+             <ul>
+               <li>付款金额<em>¥{{ amount }}</em></li>
+               <div class="user-info">
+                 <p>收货人：{{ address.reciver }}</p>
+                 <p>联系电话：{{ address.phone }}</p>
+                 <p>收货地址：{{ address.province }} {{ address.city }} {{ address.area }} {{ address.detail_loc }}</p>
+               </div>
+                     请认真核对您的收货信息，如有错误请联系客服
+             </ul>
+             <div class="option">
+               <span class="info">您可以</span>
+                <a href="#" class="J_MakePoint">查看<span>已买到的宝贝</span></a>
+                <a href="#" class="J_MakePoint">查看<span>交易详情</span></a>
+             </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block page_footer %}
+    {% include 'common/footer.html' %}
+{% endblock %}

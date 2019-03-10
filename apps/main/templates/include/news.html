@@ -1,0 +1,10 @@
+<div class="marqueenTwo">
+    <span class="marqueen-title"><i class="am-icon-volume-up am-icon-fw"></i>商城头条<em class="am-icon-angle-double-right"></em></span>
+    <div class="demo">
+        <ul id="headlines">
+            {% for head_news in head_list %}
+                <li><a href="#"><span style="color: black">{{ head_news.info }}</span></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

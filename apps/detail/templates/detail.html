@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    商品分类列表
+{% endblock %}
+
+{% block page_css %}
+    {% csrf_token %}
+    <link href="{% static 'basic/css/demo.css' %}" rel="stylesheet" type="text/css"/>
+    <link type="text/css" href="{% static 'css/optstyle.css' %}" rel="stylesheet"/>
+    <link type="text/css" href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'myself/css/style.css' %}" type="text/css">
+{% endblock %}
+
+{% block page_jq %}
+    <script type="text/javascript" src="{% static 'basic/js/quick_links.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.imagezoom.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.flexslider.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/list.js' %}"></script>
+{% endblock %}
+
+{% block page_head %}
+    {% include 'common/top.html' %}
+    {% include 'common/search/search.html' %}
+{% endblock %}
+
+{% block page_main %}
+    {% include 'include/detail_main.html' %}
+{% endblock %}
+
+{% block page_foot %}
+{% endblock %}
