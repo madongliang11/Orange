@@ -3,13 +3,10 @@ import re
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth import logout, login ,authenticate
 from django.db.models import Q
-from django.core.urlresolvers import reverse
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 
 from apps.account.form import RegisterForm
 from apps.main.models import User
-from django.contrib.auth.hashers import check_password
 from django.template import loader
 from apps.account.tasks import send_active_mail
 

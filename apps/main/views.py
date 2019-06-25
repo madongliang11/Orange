@@ -1,5 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from haystack.views import SearchView
+from apps.main.models import Image
 
 from apps.main.models import Category, Headline, Banner, ShopCar, Shop
 
@@ -47,9 +49,6 @@ def car_shop_num(request):
     return JsonResponse(result)
     # return render(request,'./common/top.html',locals())
 
-
-from haystack.views import SearchView
-from apps.main.models import Image
 
 class MySearchView(SearchView):
     def create_response(self):

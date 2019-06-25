@@ -4,7 +4,7 @@ $(function(){
 
 function show_time(){
     var time_start = new Date().getTime(); //设定当前时间
-    var time_end =  new Date("2019/2/20 00:00:00").getTime(); //设定目标时间
+    var time_end =  new Date("2019/7/1 00:00:00").getTime(); //设定目标时间
     // 计算时间差
     var time_distance = time_end - time_start;
     if (time_distance > 0){

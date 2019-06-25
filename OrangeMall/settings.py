@@ -107,7 +107,7 @@ DATABASES = {
         # 'NAME': 'omdb',
         'POST': '3306',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'madl1994',
         # 'HOST': '192.168.50.16',
         'HOST': '127.0.0.1',
     }
