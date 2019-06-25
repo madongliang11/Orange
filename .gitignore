@@ -115,11 +115,8 @@ dmypy.json
 .pyre/
 
 .idea/
-static/images/
-requirements.txt
 apps/main/migrations/
 apps/search/migrations/
 apps/account/migrations/
 apps/detail/migrations/
-static/img/
 

@@ -49,4 +49,11 @@ test1(b)
 print(b)
 
 
+class A:
+    pass
+a=A()
+b=A()
+print(a is b)
+print(a==b)
+
 
