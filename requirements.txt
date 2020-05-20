@@ -21,7 +21,7 @@ eventlet==0.24.1
 future==0.17.1
 get==2018.11.19
 greenlet==0.4.15
-httplib2==0.9.2
+httplib2==0.18.0
 idna==2.8
 jdcal==1.4
 jieba==0.39
