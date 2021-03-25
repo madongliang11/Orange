@@ -37,7 +37,7 @@ PyMySQL==0.9.3
 pysolr==3.8.1
 python-alipay-sdk==1.9.1
 pytz==2018.9
-PyYAML==3.13
+PyYAML==5.4
 query-string==2018.11.20
 redis==2.10.6
 requests==2.21.0
