@@ -17,7 +17,7 @@ django-simple-captcha==0.5.10
 djangoajax==3.0.3
 dnspython==1.16.0
 et-xmlfile==1.0.1
-eventlet==0.24.1
+eventlet==0.31.0
 future==0.17.1
 get==2018.11.19
 greenlet==0.4.15
